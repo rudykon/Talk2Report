@@ -6,9 +6,9 @@
 
 一个公开的 Codex Skill，用于将访谈、会议、产品调研、临床讨论、可用性测试、播客等音频或视频录制整理成专业、可复核、带时间戳的对话文档。
 
-[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](audio-to-polished-dialogue/SKILL.md)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](audio-to-polished-dialogue/scripts/audit_transcript.py)
-[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](audio-to-polished-dialogue/scripts/run_local_pipeline.ps1)
+[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](talk2report/SKILL.md)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](talk2report/scripts/audit_transcript.py)
+[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](talk2report/scripts/run_local_pipeline.ps1)
 [![输出格式](https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32)](#输出文件)
 
 [项目概览](#项目概览) · [处理流程](#处理流程) · [流程图](#流程图) · [快速开始](#快速开始) · [质量验证](#质量验证) · [校对原则](#校对原则) · [仓库结构](#仓库结构)
@@ -17,17 +17,17 @@
 
 ## 项目概览
 
-`Talk2Report` 提供 [`audio-to-polished-dialogue`](audio-to-polished-dialogue/SKILL.md) Codex Skill，负责协调录音检查、转写、质量审核、保守校对、说话人标注、主题整理、高风险片段复听和最终文档检查。
+本仓库提供 [`Talk2Report`](talk2report/SKILL.md) Codex Skill，负责协调录音检查、转写、质量审核、保守校对、说话人标注、主题整理、高风险片段复听和最终文档检查。
 
 > [!IMPORTANT]
 > Talk2Report 是转写编排与编辑校对 Skill。它会使用当前工作环境中可用的最佳转写能力，但不自带语音识别模型，也不会在未经授权的情况下把录音上传到外部服务。
 
 | 目标 | 实现方式 | 公开依据 |
 |---|---|---|
-| 生成易读、可追溯的对话报告 | 时间戳、稳定说话人标签、主题分节、结论与明确待办 | [`SKILL.md`](audio-to-polished-dialogue/SKILL.md) |
-| 忠实保留原始表达 | 原始转写不可变、保守校对规则、显式不确定性标记 | [`editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) |
-| 让交付质量可审计 | 重复检测、时间顺序检查、幻觉提示和高风险复听清单 | [`audit_transcript.py`](audio-to-polished-dialogue/scripts/audit_transcript.py) |
-| 交付专业文档 | 明确的 DOCX/PDF/JSON 结构和视觉检查要求 | [`output-specification.md`](audio-to-polished-dialogue/references/output-specification.md) |
+| 生成易读、可追溯的对话报告 | 时间戳、稳定说话人标签、主题分节、结论与明确待办 | [`SKILL.md`](talk2report/SKILL.md) |
+| 忠实保留原始表达 | 原始转写不可变、保守校对规则、显式不确定性标记 | [`editorial-policy.md`](talk2report/references/editorial-policy.md) |
+| 让交付质量可审计 | 重复检测、时间顺序检查、幻觉提示和高风险复听清单 | [`audit_transcript.py`](talk2report/scripts/audit_transcript.py) |
+| 交付专业文档 | 明确的 DOCX/PDF/JSON 结构和视觉检查要求 | [`output-specification.md`](talk2report/references/output-specification.md) |
 
 ## 处理流程
 
@@ -87,27 +87,27 @@ cd Talk2Report
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R audio-to-polished-dialogue ~/.codex/skills/
+cp -R talk2report ~/.codex/skills/
 ```
 
 在 Windows PowerShell 中安装：
 
 ```powershell
 New-Item -ItemType Directory -Force "$HOME\.codex\skills" | Out-Null
-Copy-Item -Recurse -Force ".\audio-to-polished-dialogue" "$HOME\.codex\skills\"
+Copy-Item -Recurse -Force ".\talk2report" "$HOME\.codex\skills\"
 ```
 
 在 Codex 中调用：
 
 ```text
-使用 $audio-to-polished-dialogue，把这个音频整理成带时间戳、说话人、
+使用 $talk2report，把这个音频整理成带时间戳、说话人、
 关键结论和待办事项的校对对话文档。
 ```
 
 如果本地存在兼容的 `audio_transcript_agent` 项目，可以使用随附脚本自动发现并调用可续跑流水线：
 
 ```powershell
-.\audio-to-polished-dialogue\scripts\run_local_pipeline.ps1 `
+.\talk2report\scripts\run_local_pipeline.ps1 `
   -AudioPath ".\recording.mp3" `
   -ProbeOnly
 ```
@@ -119,7 +119,7 @@ Copy-Item -Recurse -Force ".\audio-to-polished-dialogue" "$HOME\.codex\skills\"
 交付前审计结构化校对转写：
 
 ```bash
-python audio-to-polished-dialogue/scripts/audit_transcript.py \
+python talk2report/scripts/audit_transcript.py \
   cleaned_transcript.json \
   --output transcript_audit.json
 ```
@@ -143,15 +143,15 @@ python audio-to-polished-dialogue/scripts/audit_transcript.py \
 | 说话人的自我修正和有意义的犹豫 | 录音没有支持的决定、承诺或因果解释 |
 | `〔听不清，00:12:34〕` 等明确标记 | 在音频、术语或说话人身份不确定时制造虚假确定性 |
 
-完整的事实来源优先级、允许修改、禁止修改、不确定性标记、说话人规则和高风险复核要求，参见 [`editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md)。
+完整的事实来源优先级、允许修改、禁止修改、不确定性标记、说话人规则和高风险复核要求，参见 [`editorial-policy.md`](talk2report/references/editorial-policy.md)。
 
 ## 仓库结构
 
 | 路径 | 用途 |
 |---|---|
-| [`audio-to-polished-dialogue/SKILL.md`](audio-to-polished-dialogue/SKILL.md) | 核心编排流程与完成标准 |
-| [`audio-to-polished-dialogue/agents/openai.yaml`](audio-to-polished-dialogue/agents/openai.yaml) | Codex Skill 展示信息和默认调用提示 |
-| [`audio-to-polished-dialogue/references/editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) | 忠实校对和不确定性处理规则 |
-| [`audio-to-polished-dialogue/references/output-specification.md`](audio-to-polished-dialogue/references/output-specification.md) | 交付文件名、文档结构、JSON 结构和交付说明 |
-| [`audio-to-polished-dialogue/scripts/audit_transcript.py`](audio-to-polished-dialogue/scripts/audit_transcript.py) | 对校对转写 JSON 执行确定性结构和风险审计 |
-| [`audio-to-polished-dialogue/scripts/run_local_pipeline.ps1`](audio-to-polished-dialogue/scripts/run_local_pipeline.ps1) | 发现并调用兼容的本地可续跑转写流水线 |
+| [`talk2report/SKILL.md`](talk2report/SKILL.md) | 核心编排流程与完成标准 |
+| [`talk2report/agents/openai.yaml`](talk2report/agents/openai.yaml) | Codex Skill 展示信息和默认调用提示 |
+| [`talk2report/references/editorial-policy.md`](talk2report/references/editorial-policy.md) | 忠实校对和不确定性处理规则 |
+| [`talk2report/references/output-specification.md`](talk2report/references/output-specification.md) | 交付文件名、文档结构、JSON 结构和交付说明 |
+| [`talk2report/scripts/audit_transcript.py`](talk2report/scripts/audit_transcript.py) | 对校对转写 JSON 执行确定性结构和风险审计 |
+| [`talk2report/scripts/run_local_pipeline.ps1`](talk2report/scripts/run_local_pipeline.ps1) | 发现并调用兼容的本地可续跑转写流水线 |

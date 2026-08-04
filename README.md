@@ -6,9 +6,9 @@
 
 A public Codex skill for turning interviews, meetings, research sessions, podcasts, and other audio or video recordings into polished, timestamped dialogue documents.
 
-[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](audio-to-polished-dialogue/SKILL.md)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](audio-to-polished-dialogue/scripts/audit_transcript.py)
-[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](audio-to-polished-dialogue/scripts/run_local_pipeline.ps1)
+[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](talk2report/SKILL.md)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](talk2report/scripts/audit_transcript.py)
+[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](talk2report/scripts/run_local_pipeline.ps1)
 [![Outputs](https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32)](#output-package)
 
 [Overview](#overview) · [Workflow](#workflow) · [Visual Summary](#visual-summary) · [Quick Start](#quick-start) · [Validation](#validation) · [Editorial Policy](#editorial-policy) · [Repository Map](#repository-map)
@@ -17,17 +17,17 @@ A public Codex skill for turning interviews, meetings, research sessions, podcas
 
 ## Overview
 
-`Talk2Report` packages the [`audio-to-polished-dialogue`](audio-to-polished-dialogue/SKILL.md) Codex skill. It coordinates recording inspection, transcription, quality review, conservative proofreading, speaker labeling, topic organization, high-risk listening checks, and final document verification.
+This repository packages the [`Talk2Report`](talk2report/SKILL.md) Codex skill. It coordinates recording inspection, transcription, quality review, conservative proofreading, speaker labeling, topic organization, high-risk listening checks, and final document verification.
 
 > [!IMPORTANT]
 > Talk2Report is an orchestration and editorial skill. It uses the best transcription capability available in the working environment; it does not bundle a speech-recognition model or silently upload recordings to an external service.
 
 | Goal | Implementation | Public evidence path |
 |---|---|---|
-| Produce a readable, traceable dialogue report | Timestamped turns, stable speaker labels, topic sections, conclusions, and explicit action items | [`SKILL.md`](audio-to-polished-dialogue/SKILL.md) |
-| Preserve what was actually said | Immutable raw transcript, conservative editing rules, and visible uncertainty markers | [`editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) |
-| Keep handoff quality auditable | Duplicate checks, chronology checks, hallucination warnings, and a high-risk listening checklist | [`audit_transcript.py`](audio-to-polished-dialogue/scripts/audit_transcript.py) |
-| Deliver professional artifacts | Defined DOCX/PDF/JSON structure plus visual inspection requirements | [`output-specification.md`](audio-to-polished-dialogue/references/output-specification.md) |
+| Produce a readable, traceable dialogue report | Timestamped turns, stable speaker labels, topic sections, conclusions, and explicit action items | [`SKILL.md`](talk2report/SKILL.md) |
+| Preserve what was actually said | Immutable raw transcript, conservative editing rules, and visible uncertainty markers | [`editorial-policy.md`](talk2report/references/editorial-policy.md) |
+| Keep handoff quality auditable | Duplicate checks, chronology checks, hallucination warnings, and a high-risk listening checklist | [`audit_transcript.py`](talk2report/scripts/audit_transcript.py) |
+| Deliver professional artifacts | Defined DOCX/PDF/JSON structure plus visual inspection requirements | [`output-specification.md`](talk2report/references/output-specification.md) |
 
 ## Workflow
 
@@ -87,27 +87,27 @@ Install the skill on macOS or Linux:
 
 ```bash
 mkdir -p ~/.codex/skills
-cp -R audio-to-polished-dialogue ~/.codex/skills/
+cp -R talk2report ~/.codex/skills/
 ```
 
 Install it on Windows PowerShell:
 
 ```powershell
 New-Item -ItemType Directory -Force "$HOME\.codex\skills" | Out-Null
-Copy-Item -Recurse -Force ".\audio-to-polished-dialogue" "$HOME\.codex\skills\"
+Copy-Item -Recurse -Force ".\talk2report" "$HOME\.codex\skills\"
 ```
 
 Invoke it in Codex:
 
 ```text
-Use $audio-to-polished-dialogue to turn this recording into a polished,
+Use $talk2report to turn this recording into a polished,
 timestamped dialogue document with speaker labels, conclusions, and action items.
 ```
 
 If a compatible local `audio_transcript_agent` project is available, the bundled wrapper can discover and run its resumable pipeline:
 
 ```powershell
-.\audio-to-polished-dialogue\scripts\run_local_pipeline.ps1 `
+.\talk2report\scripts\run_local_pipeline.ps1 `
   -AudioPath ".\recording.mp3" `
   -ProbeOnly
 ```
@@ -119,7 +119,7 @@ The skill will otherwise use an available transcription capability and will repo
 Audit a structured cleaned transcript before handoff:
 
 ```bash
-python audio-to-polished-dialogue/scripts/audit_transcript.py \
+python talk2report/scripts/audit_transcript.py \
   cleaned_transcript.json \
   --output transcript_audit.json
 ```
@@ -143,16 +143,15 @@ An audit result is a review aid, not a substitute for listening to the recording
 | Speaker corrections and meaningful hesitation | Decisions, commitments, or causal explanations not supported by the recording |
 | Explicit markers such as `〔听不清，00:12:34〕` | False certainty when audio, terminology, or speaker identity remains unresolved |
 
-See the complete [`editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) for the source-of-truth order, allowed edits, forbidden edits, uncertainty notation, speaker policy, and high-risk review rules.
+See the complete [`editorial-policy.md`](talk2report/references/editorial-policy.md) for the source-of-truth order, allowed edits, forbidden edits, uncertainty notation, speaker policy, and high-risk review rules.
 
 ## Repository Map
 
 | Path | Purpose |
 |---|---|
-| [`audio-to-polished-dialogue/SKILL.md`](audio-to-polished-dialogue/SKILL.md) | Core orchestration workflow and completion standard |
-| [`audio-to-polished-dialogue/agents/openai.yaml`](audio-to-polished-dialogue/agents/openai.yaml) | Codex skill display metadata and default invocation prompt |
-| [`audio-to-polished-dialogue/references/editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) | Fact-preserving proofreading and uncertainty policy |
-| [`audio-to-polished-dialogue/references/output-specification.md`](audio-to-polished-dialogue/references/output-specification.md) | Deliverable names, document structure, JSON shape, and handoff note |
-| [`audio-to-polished-dialogue/scripts/audit_transcript.py`](audio-to-polished-dialogue/scripts/audit_transcript.py) | Deterministic structural and review audit for cleaned transcript JSON |
-| [`audio-to-polished-dialogue/scripts/run_local_pipeline.ps1`](audio-to-polished-dialogue/scripts/run_local_pipeline.ps1) | Discovery wrapper for a compatible local resumable transcription pipeline |
-
+| [`talk2report/SKILL.md`](talk2report/SKILL.md) | Core orchestration workflow and completion standard |
+| [`talk2report/agents/openai.yaml`](talk2report/agents/openai.yaml) | Codex skill display metadata and default invocation prompt |
+| [`talk2report/references/editorial-policy.md`](talk2report/references/editorial-policy.md) | Fact-preserving proofreading and uncertainty policy |
+| [`talk2report/references/output-specification.md`](talk2report/references/output-specification.md) | Deliverable names, document structure, JSON shape, and handoff note |
+| [`talk2report/scripts/audit_transcript.py`](talk2report/scripts/audit_transcript.py) | Deterministic structural and review audit for cleaned transcript JSON |
+| [`talk2report/scripts/run_local_pipeline.ps1`](talk2report/scripts/run_local_pipeline.ps1) | Discovery wrapper for a compatible local resumable transcription pipeline |

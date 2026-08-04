@@ -1,9 +1,9 @@
 ---
-name: audio-to-polished-dialogue
-description: Turn audio or video recordings into polished, fact-preserving dialogue documents with timestamps, speaker labels, corrected Chinese text, topic sections, key conclusions, explicit action items, and a review trail. Use for interviews, meetings, product research, clinical discussions, usability sessions, podcasts, or any request to transcribe, organize, proofread, or deliver a recording as DOCX, PDF, Markdown, text, or structured JSON.
+name: talk2report
+description: Turn audio or video recordings into polished, fact-preserving dialogue reports with timestamps, speaker labels, corrected Chinese text, topic sections, key conclusions, explicit action items, and a review trail. Use Talk2Report for interviews, meetings, product research, clinical discussions, usability sessions, podcasts, requests such as “把这个音频整理成校对好的对话文档”, or any task to transcribe, organize, proofread, and deliver a recording as DOCX, PDF, Markdown, text, or structured JSON.
 ---
 
-# Audio To Polished Dialogue
+# Talk2Report
 
 Produce a readable document without hiding uncertainty or inventing facts. Keep the raw transcription and quality evidence separate from the edited deliverable.
 
@@ -90,4 +90,3 @@ Call the transcript “整理校对完成” only when:
 - high-risk terms, numbers, and negations were checked;
 - summaries and action items are traceable to the dialogue;
 - the final document was opened or rendered and visually inspected.
-
