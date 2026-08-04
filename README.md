@@ -1,55 +1,158 @@
+**English** · [简体中文](README.zh-CN.md)
+
 # Talk2Report
 
-Turn audio or video recordings into polished, fact-preserving dialogue reports.
+**Fact-preserving audio-to-report transcription with conservative editing and auditable quality gates**
 
-`Talk2Report` contains the Codex skill `audio-to-polished-dialogue`. It is designed for interviews, meetings, product research, clinical discussions, usability sessions, podcasts, and other recordings that need to become readable, reviewable documents.
+A public Codex skill for turning interviews, meetings, research sessions, podcasts, and other audio or video recordings into polished, timestamped dialogue documents.
 
-## What it does
+[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](audio-to-polished-dialogue/SKILL.md)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](audio-to-polished-dialogue/scripts/audit_transcript.py)
+[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](audio-to-polished-dialogue/scripts/run_local_pipeline.ps1)
+[![Outputs](https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32)](#output-package)
 
-- Transcribes recordings into timestamped segments.
-- Preserves raw transcription separately from editorial changes.
-- Corrects punctuation, sentence boundaries, obvious recognition errors, and terminology consistently.
-- Assigns stable speaker labels without pretending uncertain identities are known.
-- Organizes dialogue by topic while preserving chronological order.
-- Extracts confirmed conclusions and explicit action items without inventing owners or deadlines.
-- Flags unclear audio, risky terms, numbers, dates, negations, and suspected ASR hallucinations for review.
-- Supports polished DOCX, PDF, Markdown, text, and structured JSON deliverables.
+[Overview](#overview) · [Workflow](#workflow) · [Visual Summary](#visual-summary) · [Quick Start](#quick-start) · [Validation](#validation) · [Editorial Policy](#editorial-policy) · [Repository Map](#repository-map)
 
-## Repository layout
+---
 
-```text
-audio-to-polished-dialogue/
-├── SKILL.md
-├── agents/openai.yaml
-├── references/
-│   ├── editorial-policy.md
-│   └── output-specification.md
-└── scripts/
-    ├── audit_transcript.py
-    └── run_local_pipeline.ps1
+## Overview
+
+`Talk2Report` packages the [`audio-to-polished-dialogue`](audio-to-polished-dialogue/SKILL.md) Codex skill. It coordinates recording inspection, transcription, quality review, conservative proofreading, speaker labeling, topic organization, high-risk listening checks, and final document verification.
+
+> [!IMPORTANT]
+> Talk2Report is an orchestration and editorial skill. It uses the best transcription capability available in the working environment; it does not bundle a speech-recognition model or silently upload recordings to an external service.
+
+| Goal | Implementation | Public evidence path |
+|---|---|---|
+| Produce a readable, traceable dialogue report | Timestamped turns, stable speaker labels, topic sections, conclusions, and explicit action items | [`SKILL.md`](audio-to-polished-dialogue/SKILL.md) |
+| Preserve what was actually said | Immutable raw transcript, conservative editing rules, and visible uncertainty markers | [`editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) |
+| Keep handoff quality auditable | Duplicate checks, chronology checks, hallucination warnings, and a high-risk listening checklist | [`audit_transcript.py`](audio-to-polished-dialogue/scripts/audit_transcript.py) |
+| Deliver professional artifacts | Defined DOCX/PDF/JSON structure plus visual inspection requirements | [`output-specification.md`](audio-to-polished-dialogue/references/output-specification.md) |
+
+## Workflow
+
+The skill treats the recording as the source of truth and moves through explicit quality gates:
+
+| Stage | Role |
+|---|---|
+| `Inspect` | Probe duration, codec, sample rate, channels, and channel energy without changing the source file |
+| `Transcribe` | Create timestamped raw segments with stable IDs and confidence data when available |
+| `Audit` | Detect duplicates, suspicious repetition, long gaps, language shifts, and common ASR hallucinations |
+| `Edit` | Correct punctuation, sentence boundaries, obvious recognition errors, and terminology conservatively |
+| `Assign` | Apply stable names or functional speaker roles while keeping uncertain identities visible |
+| `Organize` | Group chronological dialogue by real topic changes and separate conclusions from action items |
+| `Verify` | Re-listen to names, numbers, dates, units, model identifiers, negations, and low-confidence passages |
+| `Deliver` | Build the requested document and inspect layout, timestamps, headings, page breaks, and unresolved items |
+
+## Visual Summary
+
+```mermaid
+flowchart LR
+    A[Audio or video] --> B[Inspect and prepare]
+    B --> C[Immutable raw transcript]
+    C --> D{Quality gate}
+    D -->|Suspicious| E[Retry or listening review]
+    E --> D
+    D -->|Usable| F[Conservative editing]
+    F --> G[Speaker and topic organization]
+    G --> H[High-risk verification]
+    H --> I[DOCX / PDF / JSON report]
 ```
 
-## Install as a Codex skill
+The raw transcript and quality evidence remain separate from the polished deliverable, so editorial changes never replace the underlying record.
 
-Copy the `audio-to-polished-dialogue` directory into your Codex skills directory:
+## Output Package
 
-```text
-~/.codex/skills/audio-to-polished-dialogue
+When the available tools support them, the default deliverables are:
+
+| Artifact | Purpose |
+|---|---|
+| `<source>_整理校对对话稿.docx` | Polished, user-facing dialogue document |
+| `<source>_cleaned_transcript.json` | Structured edited dialogue with timestamps and provenance |
+| `<source>_transcript_audit.json` | Structural checks, warnings, unresolved segments, and listening checklist |
+| `<source>_整理校对对话稿.pdf` | Optional fixed-layout copy when requested |
+
+The main document contains metadata, timestamped dialogue grouped by topic, confirmed conclusions, explicit action items, and a review section when uncertainty remains.
+
+## Quick Start
+
+Clone the repository:
+
+```bash
+git clone https://github.com/rudykon/Talk2Report.git
+cd Talk2Report
 ```
 
-Then invoke it with a request such as:
+Install the skill on macOS or Linux:
 
-```text
-Use $audio-to-polished-dialogue to turn this recording into a polished, timestamped dialogue document.
+```bash
+mkdir -p ~/.codex/skills
+cp -R audio-to-polished-dialogue ~/.codex/skills/
 ```
 
-中文示例：
+Install it on Windows PowerShell:
 
-```text
-使用 $audio-to-polished-dialogue，把这个音频整理成带时间戳、说话人、关键结论和待办事项的校对对话文档。
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.codex\skills" | Out-Null
+Copy-Item -Recurse -Force ".\audio-to-polished-dialogue" "$HOME\.codex\skills\"
 ```
 
-## Editorial principle
+Invoke it in Codex:
 
-The recording remains the source of truth. The skill improves readability while preserving facts, uncertainty, emphasis, negation, and interpersonal intent. It never fills gaps merely to make the conversation sound smoother.
+```text
+Use $audio-to-polished-dialogue to turn this recording into a polished,
+timestamped dialogue document with speaker labels, conclusions, and action items.
+```
+
+If a compatible local `audio_transcript_agent` project is available, the bundled wrapper can discover and run its resumable pipeline:
+
+```powershell
+.\audio-to-polished-dialogue\scripts\run_local_pipeline.ps1 `
+  -AudioPath ".\recording.mp3" `
+  -ProbeOnly
+```
+
+The skill will otherwise use an available transcription capability and will report clearly when no engine is available.
+
+## Validation
+
+Audit a structured cleaned transcript before handoff:
+
+```bash
+python audio-to-polished-dialogue/scripts/audit_transcript.py \
+  cleaned_transcript.json \
+  --output transcript_audit.json
+```
+
+The audit checks:
+
+- missing text, missing speakers, duplicate IDs, and chronological order;
+- consecutive and global repeated segments;
+- unresolved speaker or terminology markers;
+- Unicode replacement characters and common hallucination phrases;
+- high-risk passages containing numbers, dates, units, negations, deadlines, or responsibility assignments.
+
+An audit result is a review aid, not a substitute for listening to the recording.
+
+## Editorial Policy
+
+| The skill preserves | The skill never invents |
+|---|---|
+| Facts, uncertainty, emphasis, negation, restrictions, disagreement, and interpersonal intent | Missing words added only to make a sentence smoother |
+| Names and terminology supported by audio or user-provided context | Names, product terms, diagnoses, quantities, dates, owners, or deadlines based on plausibility alone |
+| Speaker corrections and meaningful hesitation | Decisions, commitments, or causal explanations not supported by the recording |
+| Explicit markers such as `〔听不清，00:12:34〕` | False certainty when audio, terminology, or speaker identity remains unresolved |
+
+See the complete [`editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) for the source-of-truth order, allowed edits, forbidden edits, uncertainty notation, speaker policy, and high-risk review rules.
+
+## Repository Map
+
+| Path | Purpose |
+|---|---|
+| [`audio-to-polished-dialogue/SKILL.md`](audio-to-polished-dialogue/SKILL.md) | Core orchestration workflow and completion standard |
+| [`audio-to-polished-dialogue/agents/openai.yaml`](audio-to-polished-dialogue/agents/openai.yaml) | Codex skill display metadata and default invocation prompt |
+| [`audio-to-polished-dialogue/references/editorial-policy.md`](audio-to-polished-dialogue/references/editorial-policy.md) | Fact-preserving proofreading and uncertainty policy |
+| [`audio-to-polished-dialogue/references/output-specification.md`](audio-to-polished-dialogue/references/output-specification.md) | Deliverable names, document structure, JSON shape, and handoff note |
+| [`audio-to-polished-dialogue/scripts/audit_transcript.py`](audio-to-polished-dialogue/scripts/audit_transcript.py) | Deterministic structural and review audit for cleaned transcript JSON |
+| [`audio-to-polished-dialogue/scripts/run_local_pipeline.ps1`](audio-to-polished-dialogue/scripts/run_local_pipeline.ps1) | Discovery wrapper for a compatible local resumable transcription pipeline |
 
