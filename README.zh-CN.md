@@ -46,18 +46,9 @@ Skill 始终把录音作为事实来源，并通过明确的质量门控逐步�
 
 ## 流程图
 
-```mermaid
-flowchart LR
-    A[音频或视频] --> B[检查与预处理]
-    B --> C[不可变原始转写]
-    C --> D{质量门控}
-    D -->|存在异常| E[重试或人工复听]
-    E --> D
-    D -->|质量可用| F[保守编辑校对]
-    F --> G[说话人与主题整理]
-    G --> H[高风险信息复核]
-    H --> I[DOCX / PDF / JSON 报告]
-```
+[![Talk2Report 功能流程：音频视频输入、时间戳转写、质量审计、保守校对、说话人与主题整理、高风险信息复核及文档输出](docs/images/talk2report-overview.png)](docs/images/talk2report-overview.pdf)
+
+[查看高清 PNG](docs/images/talk2report-overview.png) · [下载 PDF 原稿](docs/images/talk2report-overview.pdf)
 
 原始转写和质量证据始终与整理后的交付文档分开保存，避免编辑结果覆盖原始记录。
 

@@ -46,18 +46,9 @@ The skill treats the recording as the source of truth and moves through explicit
 
 ## Visual Summary
 
-```mermaid
-flowchart LR
-    A[Audio or video] --> B[Inspect and prepare]
-    B --> C[Immutable raw transcript]
-    C --> D{Quality gate}
-    D -->|Suspicious| E[Retry or listening review]
-    E --> D
-    D -->|Usable| F[Conservative editing]
-    F --> G[Speaker and topic organization]
-    G --> H[High-risk verification]
-    H --> I[DOCX / PDF / JSON report]
-```
+[![Talk2Report workflow: audio and video input, transcription, quality audit, conservative proofreading, speaker and topic organization, high-risk review, and document output](docs/images/talk2report-overview.png)](docs/images/talk2report-overview.pdf)
+
+[Open the full-size PNG](docs/images/talk2report-overview.png) · [Download the PDF](docs/images/talk2report-overview.pdf)
 
 The raw transcript and quality evidence remain separate from the polished deliverable, so editorial changes never replace the underlying record.
 
