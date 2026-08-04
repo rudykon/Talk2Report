@@ -1,0 +1,4 @@
+interface:
+  display_name: "音频整理校对对话稿"
+  short_description: "把录音整理成带时间戳、说话人、结论与待办事项的校对对话文档"
+  default_prompt: "使用 $audio-to-polished-dialogue 把这个音频整理成保留事实、带时间戳和说话人的校对对话文档。"

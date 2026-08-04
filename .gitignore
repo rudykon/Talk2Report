@@ -1,0 +1,24 @@
+# Credentials
+github_token.txt
+*.token
+*.secret
+.env
+.env.*
+
+# Source recordings and generated reports
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.flac
+*.mp4
+*.mov
+*.docx
+*.pdf
+*_transcript_run/
+
+# Local caches
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
