@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="190" viewBox="0 0 760 190" role="img" aria-labelledby="title desc">
+  <title id="title">Talk2Report brand mark</title>
+  <desc id="desc">A recorded waveform becomes a verified, structured report.</desc>
+  <rect x="18" y="18" width="154" height="154" rx="38" fill="#4A35A8"/>
+  <path d="M38 93h10l7-22 12 48 12-63 12 74 11-54 9 34h9" fill="none" stroke="#70E1D4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M104 46h33l17 17v72a9 9 0 0 1-9 9h-41a9 9 0 0 1-9-9V55a9 9 0 0 1 9-9z" fill="#FFFFFF"/>
+  <path d="M137 46v18h17" fill="#DCD7FF"/>
+  <path d="M108 83h32M108 98h32M108 113h18" stroke="#4A35A8" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="139" cy="126" r="17" fill="#FEBD08"/>
+  <path d="M131 126l6 6 11-13" fill="none" stroke="#342577" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="208" y="91" fill="#392780" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="44" font-weight="760">Talk2Report</text>
+  <text x="211" y="124" fill="#7267A0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif" font-size="16" font-weight="650" letter-spacing="1.5">AUDIO · AUDIT · STRUCTURED REPORT</text>
+  <path d="M210 140h472" stroke="#E0DCF1" stroke-width="3" stroke-linecap="round"/>
+</svg>
