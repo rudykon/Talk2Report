@@ -1,5 +1,9 @@
 **English** · [简体中文](README.zh-CN.md)
 
+<p align="center">
+  <img src="docs/brand-mark.svg" width="520" alt="Talk2Report brand mark">
+</p>
+
 # Talk2Report
 
 **Fact-preserving audio-to-report transcription with conservative editing and auditable quality gates**
@@ -146,3 +150,4 @@ See the complete [`editorial-policy.md`](talk2report/references/editorial-policy
 | [`talk2report/references/output-specification.md`](talk2report/references/output-specification.md) | Deliverable names, document structure, JSON shape, and handoff note |
 | [`talk2report/scripts/audit_transcript.py`](talk2report/scripts/audit_transcript.py) | Deterministic structural and review audit for cleaned transcript JSON |
 | [`talk2report/scripts/run_local_pipeline.ps1`](talk2report/scripts/run_local_pipeline.ps1) | Discovery wrapper for a compatible local resumable transcription pipeline |
+

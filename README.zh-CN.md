@@ -1,5 +1,9 @@
 [English](README.md) · **简体中文**
 
+<p align="center">
+  <img src="docs/brand-mark.svg" width="520" alt="Talk2Report 品牌标识">
+</p>
+
 # Talk2Report
 
 **以事实为准的音频转报告流程：保守校对、质量门控、全程可追溯**
@@ -146,3 +150,4 @@ python talk2report/scripts/audit_transcript.py \
 | [`talk2report/references/output-specification.md`](talk2report/references/output-specification.md) | 交付文件名、文档结构、JSON 结构和交付说明 |
 | [`talk2report/scripts/audit_transcript.py`](talk2report/scripts/audit_transcript.py) | 对校对转写 JSON 执行确定性结构和风险审计 |
 | [`talk2report/scripts/run_local_pipeline.ps1`](talk2report/scripts/run_local_pipeline.ps1) | 发现并调用兼容的本地可续跑转写流水线 |
+
