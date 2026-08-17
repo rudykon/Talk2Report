@@ -4,7 +4,8 @@
   <img src="docs/brand-mark.svg" width="520" alt="Talk2Report brand mark">
 </p>
 
-# Talk2Report
+<h1 align="center">Talk2Report</h1>
+
 
 **Fact-preserving audio-to-report transcription with conservative editing and auditable quality gates**
 
