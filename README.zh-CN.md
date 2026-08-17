@@ -4,7 +4,8 @@
   <img src="docs/brand-mark.svg" width="520" alt="Talk2Report 品牌标识">
 </p>
 
-# Talk2Report
+<h1 align="center">Talk2Report</h1>
+
 
 **以事实为准的音频转报告流程：保守校对、质量门控、全程可追溯**
 
