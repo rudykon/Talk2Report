@@ -6,17 +6,30 @@
 
 <h1 align="center">Talk2Report</h1>
 
+<p align="center">
+  <strong>以事实为准的音频转报告流程：保守校对、质量门控、全程可追溯</strong>
+</p>
 
-**以事实为准的音频转报告流程：保守校对、质量门控、全程可追溯**
+<p align="center">
+  一个公开的 Codex Skill，用于将访谈、会议、产品调研、临床讨论、可用性测试、播客等音频或视频录制整理成专业、可复核、带时间戳的对话文档。
+</p>
 
-一个公开的 Codex Skill，用于将访谈、会议、产品调研、临床讨论、可用性测试、播客等音频或视频录制整理成专业、可复核、带时间戳的对话文档。
+<p align="center">
+  <a href="talk2report/SKILL.md"><img src="https://img.shields.io/badge/Codex-Skill-412991?logo=openai&amp;logoColor=white" alt="Codex Skill"></a>
+  <a href="talk2report/scripts/audit_transcript.py"><img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&amp;logoColor=white" alt="Python 3.9+"></a>
+  <a href="talk2report/scripts/run_local_pipeline.ps1"><img src="https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&amp;logoColor=white" alt="PowerShell 本地流水线"></a>
+  <a href="#输出文件"><img src="https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32" alt="输出格式：DOCX、PDF、JSON"></a>
+</p>
 
-[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](talk2report/SKILL.md)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](talk2report/scripts/audit_transcript.py)
-[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](talk2report/scripts/run_local_pipeline.ps1)
-[![输出格式](https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32)](#输出文件)
-
-[项目概览](#项目概览) · [处理流程](#处理流程) · [流程图](#流程图) · [快速开始](#快速开始) · [质量验证](#质量验证) · [校对原则](#校对原则) · [仓库结构](#仓库结构)
+<p align="center">
+  <a href="#项目概览">项目概览</a> ·
+  <a href="#处理流程">处理流程</a> ·
+  <a href="#流程图">流程图</a> ·
+  <a href="#快速开始">快速开始</a> ·
+  <a href="#质量验证">质量验证</a> ·
+  <a href="#校对原则">校对原则</a> ·
+  <a href="#仓库结构">仓库结构</a>
+</p>
 
 ---
 
