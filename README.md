@@ -6,15 +6,20 @@
 
 <h1 align="center">Talk2Report</h1>
 
+<p align="center">
+  <strong>Fact-preserving audio-to-report transcription with conservative editing and auditable quality gates</strong>
+</p>
 
-**Fact-preserving audio-to-report transcription with conservative editing and auditable quality gates**
+<p align="center">
+  A public Codex skill for turning interviews, meetings, research sessions, podcasts, and other audio or video recordings into polished, timestamped dialogue documents.
+</p>
 
-A public Codex skill for turning interviews, meetings, research sessions, podcasts, and other audio or video recordings into polished, timestamped dialogue documents.
-
-[![Codex Skill](https://img.shields.io/badge/Codex-Skill-412991?logo=openai&logoColor=white)](talk2report/SKILL.md)
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](talk2report/scripts/audit_transcript.py)
-[![PowerShell Pipeline](https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&logoColor=white)](talk2report/scripts/run_local_pipeline.ps1)
-[![Outputs](https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32)](#output-package)
+<p align="center">
+  <a href="talk2report/SKILL.md"><img src="https://img.shields.io/badge/Codex-Skill-412991?logo=openai&amp;logoColor=white" alt="Codex Skill"></a>
+  <a href="talk2report/scripts/audit_transcript.py"><img src="https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&amp;logoColor=white" alt="Python 3.9+"></a>
+  <a href="talk2report/scripts/run_local_pipeline.ps1"><img src="https://img.shields.io/badge/PowerShell-Local%20Pipeline-5391FE?logo=powershell&amp;logoColor=white" alt="PowerShell Local Pipeline"></a>
+  <a href="#output-package"><img src="https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32" alt="Outputs: DOCX, PDF, JSON"></a>
+</p>
 
 [Overview](#overview) · [Workflow](#workflow) · [Visual Summary](#visual-summary) · [Quick Start](#quick-start) · [Validation](#validation) · [Editorial Policy](#editorial-policy) · [Repository Map](#repository-map)
 
