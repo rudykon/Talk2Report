@@ -21,7 +21,15 @@
   <a href="#output-package"><img src="https://img.shields.io/badge/Outputs-DOCX%20%7C%20PDF%20%7C%20JSON-2E7D32" alt="Outputs: DOCX, PDF, JSON"></a>
 </p>
 
-[Overview](#overview) · [Workflow](#workflow) · [Visual Summary](#visual-summary) · [Quick Start](#quick-start) · [Validation](#validation) · [Editorial Policy](#editorial-policy) · [Repository Map](#repository-map)
+<p align="center">
+  <a href="#overview">Overview</a> ·
+  <a href="#workflow">Workflow</a> ·
+  <a href="#visual-summary">Visual Summary</a> ·
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#validation">Validation</a> ·
+  <a href="#editorial-policy">Editorial Policy</a> ·
+  <a href="#repository-map">Repository Map</a>
+</p>
 
 ---
 
